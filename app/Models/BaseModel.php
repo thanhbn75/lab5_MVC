@@ -2,26 +2,16 @@
 namespace App\Models;
 
 use PDO;
-use PDOException;
 
-class BaseModel
-{
-    protected $conn;
+class BaseModel {
+    protected $pdo;
 
-    public function __construct()
-    {
-        $host = "localhost";
-        $dbname = "buoi2_php";
-        $username = "root";
-        $password = "";
-
-        try {
-            $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
-            $this->conn = new PDO($dsn, $username, $password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo "Hệ thống đang bảo trì, vui lòng quay lại sau";
-            exit();
-        }
+    public function __construct() {
+        $this->pdo = new PDO(
+            "mysql:host=localhost;dbname=buoi2_php;charset=utf8",
+            "root",
+            ""
+        );
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 }
